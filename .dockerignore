@@ -1,0 +1,52 @@
+# .dockerignore - Arquivos a serem ignorados no build Docker
+
+# Git
+.git
+.gitignore
+
+# CI/CD
+.github
+
+# Documentation
+docs/
+*.md
+!README.md
+
+# Development
+node_modules/
+.npm
+.vscode/
+.idea/
+
+# Testing
+tests/
+coverage/
+.nyc_output
+
+# Logs
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment files (não são necessários no container)
+.env*
+
+# Build artifacts
+dist/
+build/
+
+# Backup files
+backups/
+*.backup
+
+# Scripts de desenvolvimento
+scripts/
+config/
+
+# Docker files (não precisam estar dentro do container)
+Dockerfile
+docker-compose.yml
+.dockerignore
