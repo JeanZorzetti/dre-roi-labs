@@ -1,0 +1,33 @@
+# DRE ROI Labs - Docker Compose para desenvolvimento local
+# Para usar: docker-compose up -d
+
+version: '3.8'
+
+services:
+  dre-roi-labs:
+    build: .
+    container_name: dre-roi-labs
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    volumes:
+      - ./logs:/var/log/nginx
+    environment:
+      - NODE_ENV=production
+      - TZ=America/Sao_Paulo
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dre.rule=Host(`dre.roilabs.com.br`)"
+      - "traefik.http.routers.dre.tls=true"
+      - "traefik.http.routers.dre.tls.certresolver=letsencrypt"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  default:
+    external: true
+    name: easypanel
